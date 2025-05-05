@@ -4,7 +4,9 @@ package com.example.myFirst.controller;
 import com.example.myFirst.entity.Employee;
 import com.example.myFirst.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -46,6 +48,36 @@ public class MyController {
         return servicee.updateData(employee,id);
 
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<Employee> uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("companyName") String companyName,
+            @RequestParam("salary") int salary
+    ) {
+        try {
+            Employee employee = new Employee();
+            employee.setId(id);
+            employee.setName(name);
+            employee.setCompanyName(companyName);
+            employee.setSalary(salary);
+            employee.setFileName(file.getOriginalFilename());
+            employee.setFileType(file.getContentType());
+            employee.setFileData(file.getBytes());
+
+            Employee saved = servicee.savedata(employee);
+            return ResponseEntity.ok(saved);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+
+
+
+
 
 
 

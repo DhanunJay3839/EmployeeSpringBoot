@@ -2,7 +2,10 @@ package com.example.myFirst.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+
+import java.util.Arrays;
 
 @Entity
 @Table(name = "Employee")
@@ -12,6 +15,14 @@ public class Employee {
     private String name;
     private String companyName;
     private int salary;
+
+    private String fileName;
+    private String fileType;
+
+    @Lob
+    private byte[] fileData;
+
+
 
     public Employee() {
     }
@@ -48,6 +59,30 @@ public class Employee {
         this.salary = salary;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public byte[] getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(byte[] fileData) {
+        this.fileData = fileData;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -55,6 +90,9 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", salary=" + salary +
+                ", fileName='" + fileName + '\'' +
+                ", fileType='" + fileType + '\'' +
+                ", fileData=" + Arrays.toString(fileData) +
                 '}';
     }
 }
