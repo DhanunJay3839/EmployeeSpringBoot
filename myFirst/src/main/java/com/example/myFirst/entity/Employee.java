@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.*;
 
 import java.util.Arrays;
 
@@ -12,9 +13,18 @@ import java.util.Arrays;
 public class Employee {
     @Id
     private int id;
+
+    @NotBlank
+    @Size(min=3,max=10)
     private String name;
+
+    @NotNull
     private String companyName;
+
+    @Min(10000)
+    @Max(100000)
     private int salary;
+
 
     private String fileName;
     private String fileType;

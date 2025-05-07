@@ -17,7 +17,7 @@ public class Security {
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         return new InMemoryUserDetailsManager(
                 User.withUsername("admin")
-                        .password(passwordEncoder.encode("admin123"))
+                        .password(passwordEncoder.encode("admin1234"))
                         .roles("user")
                         .build()
         );
@@ -35,20 +35,5 @@ public class Security {
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .httpBasic(httpBasic -> {});
         return http.build();
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 }
